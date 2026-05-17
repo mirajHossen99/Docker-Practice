@@ -1,0 +1,18 @@
+------------------- Docker -------------------
+
+- sudo docker --help
+- docker ps / docker container ls
+- docker container ls -la
+- docker container ls -a
+- docker container ls -l
+- docker images
+- docker system prune (delete all container)
+- docker rmi [image name]
+- docker start [container name/container ID]
+- docker stop [container name/container ID]
+- docker logs [container name/container ID]
+- docker rm -f [container name/container ID]
+- docker exec -it [container name/container ID]
+- docker run redis
+- docker exec -it [container name/container ID] redis-cli
+- docker inspect [container name/container ID]
