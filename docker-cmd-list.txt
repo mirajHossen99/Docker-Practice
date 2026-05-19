@@ -7,7 +7,7 @@
 - docker container ls -l
 - docker images
 - docker system prune (delete all container)
-- docker rmi [image name]
+- docker rmi -f [image name]
 - docker start [container name/container ID]
 - docker stop [container name/container ID]
 - docker logs [container name/container ID]
