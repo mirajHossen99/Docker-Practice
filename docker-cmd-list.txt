@@ -16,3 +16,8 @@
 - docker run redis
 - docker exec -it [container name/container ID] redis-cli
 - docker inspect [container name/container ID]
+
+-------------------- myapp -----------------------
+- docker build -t myapp .
+- docker run -it -p 3001:3000 --name myapp-con myapp
+
