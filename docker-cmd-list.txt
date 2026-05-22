@@ -18,6 +18,9 @@
 - docker inspect [container name/container ID]
 
 -------------------- myapp -----------------------
-- docker build -t myapp .
+- docker build -t myapp . (image)
 - docker run -it -p 3001:3000 --name myapp-con myapp
+- docker run -it --rm -p 4000:8080 --name my-test-api-con my-test-api
 
+------- docker compose --------
+- docker compose up
