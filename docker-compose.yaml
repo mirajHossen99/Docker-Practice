@@ -7,4 +7,69 @@ services:
     ports:
       - "4000:8080"
     environment:
-      - DATABASE_URL="testbd"
+      - DATABASE_URL=mongodb://demo-mongo:27017/api-db
+    volumes:
+      - ./api:/app
+    networks:
+      - demo-network
+    depends_on:
+      - demo-mongo
+
+  # Mongo DB
+  demo-mongo:
+    image: mongo:latest
+    container_name: demo-mongo-con
+    ports:
+      - "27017:27017"
+    networks:
+      - demo-network
+    volumes:
+      - demo-mongo-data:/data/db
+
+  # Mongo Express
+  demo-mongo-express:
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=demo-mongo
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=password
+    networks:
+      - demo-network
+    depends_on:
+      - demo-mongo
+
+  # Postgres
+  demo-postgressql:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    volumes:
+      - demo-postgres-data:/var/lib/postgresql/data
+    networks:
+      - demo-network
+
+  demo-pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - '5050:80'
+    depends_on:
+      - demo-postgressql
+    networks:
+      - demo-network
+
+networks:
+  demo-network:
+    driver: bridge
+
+volumes:
+  demo-mongo-data:
+  demo-postgres-data:

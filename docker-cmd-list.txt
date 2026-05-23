@@ -24,3 +24,9 @@
 
 ------- docker compose --------
 - docker compose up
+- docker compose down
+- docker compose up --build
+- docker compose --help
+- docker network ls
+
+
