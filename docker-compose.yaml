@@ -1,5 +1,6 @@
 version: "3.8"
 services:
+  # api
   demo-api:
     build:
       context: ./api
@@ -53,7 +54,8 @@ services:
       - demo-postgres-data:/var/lib/postgresql/data
     networks:
       - demo-network
-
+  
+  # pg-admin
   demo-pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -66,10 +68,28 @@ services:
     networks:
       - demo-network
 
+  # Redis
+  demo-redis-stack:
+    image: redis/redis-stack:latest
+    ports:
+      - '6379:6379'
+      - '8001:8001'
+    volumes:
+      - demo-redis-data:/data
+    environment:
+      - REDIS_ARGS=--save 900 1
+    networks:
+      - demo-network
+
+  #
+
+# Networks
 networks:
   demo-network:
     driver: bridge
 
+# Volumes
 volumes:
   demo-mongo-data:
   demo-postgres-data:
+  demo-redis-data:
