@@ -75,13 +75,22 @@ services:
       - '6379:6379'
       - '8001:8001'
     volumes:
-      - demo-redis-data:/data
+      - demo-redis-data:/var/lib/redis-stack
     environment:
       - REDIS_ARGS=--save 900 1
     networks:
       - demo-network
 
-  #
+  # RabbitMQ
+  demo-rabbitmq:
+    image: rabbitmq:3.8-management
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - demo-rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - demo-network
 
 # Networks
 networks:
@@ -93,3 +102,4 @@ volumes:
   demo-mongo-data:
   demo-postgres-data:
   demo-redis-data:
+  demo-rabbitmq-data:
